@@ -15,13 +15,17 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      children: <Widget>[
-        new TextField(controller: _user, decoration: new InputDecoration(hintText: 'Enter your username'),),
-        new TextField(controller: _pass, decoration: new InputDecoration(hintText: 'Enter your password'), obscureText: true,),
-        new RaisedButton(child: new Text('Submit'), onPressed: onSubmit,)
-      ],
-    );
+    return
+        new Container(
+          padding: EdgeInsets.all(32.0),
+          child: new Column(
+            children: <Widget>[
+              new TextField(controller: _user, decoration: new InputDecoration(hintText: 'Enter your username'),),
+              new TextField(controller: _pass, decoration: new InputDecoration(hintText: 'Enter your password'), obscureText: true,),
+              new RaisedButton(child: new Text('Submit'), onPressed: onSubmit,)
+            ],
+          )
+        );
   }
 
 }
