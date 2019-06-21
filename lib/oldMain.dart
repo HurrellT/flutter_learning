@@ -205,34 +205,62 @@
 //LOGIN APP
 
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/material.dart';
+//import 'package:flutter/widgets.dart';
+//import 'package:flutter/foundation.dart';
+//
+//class Login extends StatelessWidget {
+//
+//  const Login ({Key key, @required this.onSubmit}) : super(key:key);
+//
+//  final VoidCallback onSubmit;
+//  static final TextEditingController _user = new TextEditingController();
+//  static final TextEditingController _pass = new TextEditingController();
+//
+//  String get username => _user.text;
+//  String get password => _pass.text;
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return
+//      new Container(
+//          padding: EdgeInsets.all(32.0),
+//          child: new Column(
+//            children: <Widget>[
+//              new TextField(controller: _user, decoration: new InputDecoration(hintText: 'Enter your username'),),
+//              new TextField(controller: _pass, decoration: new InputDecoration(hintText: 'Enter your password'), obscureText: true,),
+//              new RaisedButton(child: new Text('Submit'), onPressed: onSubmit,)
+//            ],
+//          )
+//      );
+//  }
+//
+//}
 
-class Login extends StatelessWidget {
+// NAVIGATORS AND ROUTERS
 
-  const Login ({Key key, @required this.onSubmit}) : super(key:key);
-
-  final VoidCallback onSubmit;
-  static final TextEditingController _user = new TextEditingController();
-  static final TextEditingController _pass = new TextEditingController();
-
-  String get username => _user.text;
-  String get password => _pass.text;
-
-  @override
-  Widget build(BuildContext context) {
-    return
-      new Container(
-          padding: EdgeInsets.all(32.0),
-          child: new Column(
-            children: <Widget>[
-              new TextField(controller: _user, decoration: new InputDecoration(hintText: 'Enter your username'),),
-              new TextField(controller: _pass, decoration: new InputDecoration(hintText: 'Enter your password'), obscureText: true,),
-              new RaisedButton(child: new Text('Submit'), onPressed: onSubmit,)
-            ],
-          )
-      );
-  }
-
-}
+//import 'package:flutter/cupertino.dart';
+//import 'package:flutter/material.dart';
+//import 'package:flutter_learning/Screens/NavigationAppHome.dart';
+//import 'package:flutter_learning/Screens/Second.dart';
+//import 'package:flutter_learning/Screens/Third.dart';
+//
+//void main() => runApp(new MyApp());
+//
+//class MyApp extends StatelessWidget {
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return
+//      new MaterialApp(
+//        title: 'Navigation',
+//        routes: <String,WidgetBuilder>{
+//          '/Home' : (BuildContext context) => new NavigationAppHome(),
+//          '/Second' : (BuildContext context) => new Second(),
+//          '/Third' : (BuildContext context) => new Third()
+//        },
+//        home: new NavigationAppHome(),
+//      );
+//  }
+//
+//}
