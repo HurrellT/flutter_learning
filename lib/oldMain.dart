@@ -147,55 +147,92 @@
 
 // PRIMER APP BAR CON ICONOS
 
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
+//import 'package:flutter/material.dart';
+//
+//void main() => runApp(new MyApp());
+//
+////Will not change
+//class MyApp extends StatefulWidget {
+//
+//  @override
+//  State<StatefulWidget> createState() => new _MyAppState();
+//
+//}
+//
+////Will change (Because its a State)
+//class _MyAppState extends State<MyApp> {
+//
+//  String _title = 'App Bar Demo';
+//  String _myState = 'No State';
+//
+//  void _pressed(String message) {
+//    // Hay que hacer esto, para que guarde el estado, asi podes cambiar de app, etc, y guarda el estado hagas lo que hagas
+//    setState(() {
+//      _myState = message;
+//    });
+//    //Hacerlo de una NO SIRVE
+////    _myState = message;
+//    print(_myState);
+//  }
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return new MaterialApp(
+//      title: _title,
+//      home: new Scaffold(
+//        appBar: new AppBar(
+//          title: new Text(_title),
+//          actions: <Widget>[
+//            new IconButton(icon: new Icon(Icons.add_alert), onPressed: () {_pressed('Alert pressed');},),
+//            new IconButton(icon: new Icon(Icons.print), onPressed: () {_pressed('Print pressed');},),
+//            new IconButton(icon: new Icon(Icons.people), onPressed: () {_pressed('People pressed');},),
+//          ],
+//        ),
+//        body: new Container(
+//          padding: const EdgeInsets.all(32.0),
+//          child: new Center(
+//            child: new Text(_myState),
+//          ),
+//        ),
+//      ),
+//    );
+//  }
+//}
+
+
+//------------------------------------------------------------------------------------------------
+//LOGIN APP
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 
-void main() => runApp(new MyApp());
+class Login extends StatelessWidget {
 
-//Will not change
-class MyApp extends StatefulWidget {
+  const Login ({Key key, @required this.onSubmit}) : super(key:key);
 
-  @override
-  State<StatefulWidget> createState() => new _MyAppState();
+  final VoidCallback onSubmit;
+  static final TextEditingController _user = new TextEditingController();
+  static final TextEditingController _pass = new TextEditingController();
 
-}
-
-//Will change (Because its a State)
-class _MyAppState extends State<MyApp> {
-
-  String _title = 'App Bar Demo';
-  String _myState = 'No State';
-
-  void _pressed(String message) {
-    // Hay que hacer esto, para que guarde el estado, asi podes cambiar de app, etc, y guarda el estado hagas lo que hagas
-    setState(() {
-      _myState = message;
-    });
-    //Hacerlo de una NO SIRVE
-//    _myState = message;
-    print(_myState);
-  }
+  String get username => _user.text;
+  String get password => _pass.text;
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: _title,
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text(_title),
-          actions: <Widget>[
-            new IconButton(icon: new Icon(Icons.add_alert), onPressed: () {_pressed('Alert pressed');},),
-            new IconButton(icon: new Icon(Icons.print), onPressed: () {_pressed('Print pressed');},),
-            new IconButton(icon: new Icon(Icons.people), onPressed: () {_pressed('People pressed');},),
-          ],
-        ),
-        body: new Container(
-          padding: const EdgeInsets.all(32.0),
-          child: new Center(
-            child: new Text(_myState),
-          ),
-        ),
-      ),
-    );
+    return
+      new Container(
+          padding: EdgeInsets.all(32.0),
+          child: new Column(
+            children: <Widget>[
+              new TextField(controller: _user, decoration: new InputDecoration(hintText: 'Enter your username'),),
+              new TextField(controller: _pass, decoration: new InputDecoration(hintText: 'Enter your password'), obscureText: true,),
+              new RaisedButton(child: new Text('Submit'), onPressed: onSubmit,)
+            ],
+          )
+      );
   }
+
 }
