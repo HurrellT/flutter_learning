@@ -12,47 +12,32 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
 
-  List<bool> _data = new List();
-
-  @override
-  void initState() {
-    setState(() {
-      for(int i = 0; i < 20; i++) {
-        _data.add(false);
-      }
-    });
-  }
-
-  void _onChanged(bool value, int index) {
-    setState(() {
-      _data[index] = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text('ListView Demo'),),
-      body: new ListView.builder(
-        itemCount: _data.length,
-        itemBuilder: (BuildContext context, int index) {
-          return new Card(
-            child: new Container(
-              padding: new EdgeInsets.all(5),
-              child: new Column(
-                children: <Widget>[
-                  new Text('This is item ${index}'),
-                  new CheckboxListTile(
-                    value: _data[index],
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: new Text('Click me item ${index}'),
-                    onChanged: (bool value){_onChanged(value, index);},
-                  )
-                ],
-              ),
-            ),
-          );
-        }
+      appBar: new AppBar(title: new Text('Name here'),),
+      drawer: new Drawer(
+        child: new Container(
+          padding: new EdgeInsets.all(32),
+          child: new Column(
+            children: <Widget>[
+              new Text('Hello Drawer'),
+              new RaisedButton(
+                color: Colors.red,
+                child: new Text('Close'),
+                onPressed: (){Navigator.pop(context);},
+              )
+            ],
+          ),
+        ),
+      ),
+      body: new Container(
+        padding: new EdgeInsets.all(32),
+        child: new Column(
+          children: <Widget>[
+            new Text('Add Widgets here')
+          ],
+        ),
       ),
     );
   }
