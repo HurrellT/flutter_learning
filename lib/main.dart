@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -13,35 +11,54 @@ class MyApp extends StatefulWidget {
 
 }
 
+enum Answer{YES,NO,MAYBE}
+
 class MyAppState extends State<MyApp> {
 
-  DateTime _date = new DateTime.now();
-  TimeOfDay _time = new TimeOfDay.now();
+  String _answer = '';
 
-  Future<Null> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: _date,
-        firstDate: new DateTime(2016),
-        lastDate: new DateTime(2020));
-
-    if(picked != null && picked != _date) {
-      print('Date selected: ${_date.toString()}');
-      setState(() {
-        _date = picked;
-      });
-    }
+  void setAnswer(String value) {
+    setState(() {
+      //TODO: act on the answer
+      _answer = value;
+    });
   }
 
-  Future<Null> _selectTime(BuildContext context) async {
-    final TimeOfDay picked = await showTimePicker(
+  Future<Null> _askUser() async {
+    switch(
+      await showDialog(
         context: context,
-        initialTime: _time);
-    if(picked != null && picked != _time) {
-      print('Time selected: ${_time.toString()}');
-      setState(() {
-        _time = picked;
-      });
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: new Text('Do you like Flutter?'),
+            children: <Widget>[
+              new SimpleDialogOption(
+                onPressed: (){Navigator.pop(context,Answer.YES);},
+                child: const Text('Yes!'),
+              ),
+              new SimpleDialogOption(
+                onPressed: (){Navigator.pop(context,Answer.NO);},
+                child: const Text('No!'),
+              ),
+              new SimpleDialogOption(
+                onPressed: (){Navigator.pop(context,Answer.MAYBE);},
+                child: const Text('Maybe...'),
+              ),
+              new Icon(Icons.home),
+            ],
+          );
+        },
+      )
+    ) {
+      case Answer.YES:
+        setAnswer('yes');
+        break;
+      case Answer.NO:
+        setAnswer('no');
+        break;
+      case Answer.MAYBE:
+        setAnswer('maybe');
+        break;
     }
   }
 
@@ -53,17 +70,11 @@ class MyAppState extends State<MyApp> {
         padding: new EdgeInsets.all(32),
         child: new Column(
           children: <Widget>[
-            new Text('Date selected: ${_date.toString()}'),
+            new Text('You answered ${_answer}'),
             new RaisedButton(
-              child: new Text('Select Date'),
-              onPressed: (){_selectDate(context);},
-            ),
-            new Text(' '),
-            new Text('Time selected: ${_time.toString()}'),
-            new RaisedButton(
-            child: new Text('Select Tme'),
-            onPressed: (){_selectTime(context);},
-            ),
+              child: new Text('Click me'),
+              onPressed: _askUser,
+            )
           ],
         ),
       ),
