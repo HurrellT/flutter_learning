@@ -12,46 +12,47 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
 
-  String _value = '';
-//  List<String> values = new List<String>();
-  List<String> _values = new List();
+  List<bool> _data = new List();
 
   @override
   void initState() {
-    _values.addAll(['Bryan' , 'Chris', 'Heather' , 'Tommy']);
-    _value = _values.elementAt(0);
+    setState(() {
+      for(int i = 0; i < 20; i++) {
+        _data.add(false);
+      }
+    });
   }
 
-  void _onChanged(String value) {
+  void _onChanged(bool value, int index) {
     setState(() {
-      _value = value;
+      _data[index] = value;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text('DropDownButton Demo'),),
-      body: new Container(
-        padding: new EdgeInsets.all(32),
-        child: new Column(
-          children: <Widget>[
-            new DropdownButton(
-              value: _value,
-              items: _values.map((String value){
-                return new DropdownMenuItem(
-                  value: value,
-                  child: new Row(
-                    children: <Widget>[
-                      new Icon(Icons.home),
-                      new Text('Person: ${value}')
-                    ],
-                  ),);
-              }).toList(),
-              onChanged: (String value) {_onChanged(value);},
-            )
-          ],
-        ),
+      appBar: new AppBar(title: new Text('ListView Demo'),),
+      body: new ListView.builder(
+        itemCount: _data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return new Card(
+            child: new Container(
+              padding: new EdgeInsets.all(5),
+              child: new Column(
+                children: <Widget>[
+                  new Text('This is item ${index}'),
+                  new CheckboxListTile(
+                    value: _data[index],
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: new Text('Click me item ${index}'),
+                    onChanged: (bool value){_onChanged(value, index);},
+                  )
+                ],
+              ),
+            ),
+          );
+        }
       ),
     );
   }
