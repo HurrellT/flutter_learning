@@ -12,30 +12,30 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
 
-  String _lastPress = 'never';
-
-  void _onPressed() {
-    print('pressed');
-    setState(() {
-      DateTime current = new DateTime.now();
-      _lastPress = current.toString();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(title: new Text('Name here'),),
-      floatingActionButton: new FloatingActionButton(
-        child: new Icon(Icons.timer),
-        backgroundColor: Colors.red,
-        onPressed: _onPressed,
+      drawer: new Drawer(
+        child: new Container(
+          padding: new EdgeInsets.all(32),
+          child: new Column(
+            children: <Widget>[
+              new Text('Hello Drawer'),
+              new RaisedButton(
+                color: Colors.red,
+                child: new Text('Close'),
+                onPressed: (){Navigator.pop(context);},
+              )
+            ],
+          ),
+        ),
       ),
       body: new Container(
         padding: new EdgeInsets.all(32),
         child: new Column(
           children: <Widget>[
-            new Text('Last pressed: ${_lastPress}')
+            new Text('Add Widgets here')
           ],
         ),
       ),
