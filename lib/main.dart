@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() => runApp(new MaterialApp(home: new MyApp(),));
 
@@ -10,7 +13,37 @@ class MyApp extends StatefulWidget {
 
 }
 
-class MyAppState extends State<MyApp> with WidgetsBindingObserver{
+class MyAppState extends State<MyApp> {
+
+  DateTime _date = new DateTime.now();
+  TimeOfDay _time = new TimeOfDay.now();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: _date,
+        firstDate: new DateTime(2016),
+        lastDate: new DateTime(2020));
+
+    if(picked != null && picked != _date) {
+      print('Date selected: ${_date.toString()}');
+      setState(() {
+        _date = picked;
+      });
+    }
+  }
+
+  Future<Null> _selectTime(BuildContext context) async {
+    final TimeOfDay picked = await showTimePicker(
+        context: context,
+        initialTime: _time);
+    if(picked != null && picked != _time) {
+      print('Time selected: ${_time.toString()}');
+      setState(() {
+        _time = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,46 +53,21 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver{
         padding: new EdgeInsets.all(32),
         child: new Column(
           children: <Widget>[
-            new Text('Add Widgets here')
+            new Text('Date selected: ${_date.toString()}'),
+            new RaisedButton(
+              child: new Text('Select Date'),
+              onPressed: (){_selectDate(context);},
+            ),
+            new Text(' '),
+            new Text('Time selected: ${_time.toString()}'),
+            new RaisedButton(
+            child: new Text('Select Tme'),
+            onPressed: (){_selectTime(context);},
+            ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    print('*** init state');
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    print('*** state = ${state.toString()}');
-    switch(state) {
-      case AppLifecycleState.inactive:
-        print('*** inactive');
-        break;
-      case AppLifecycleState.paused:
-        print('*** paused');
-        break;
-      case AppLifecycleState.resumed:
-        print('*** resumed');
-        break;
-      case AppLifecycleState.suspending:
-        print('*** suspending');
-        break;
-
-    }
-  }
-
-  @override
-  void dispose() {
-    print('*** dispose');
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-
   }
 
 }
